@@ -5,6 +5,8 @@ Provide all env variables to env.env, then from project folder run
 
     docker-compose -f ./deploy/docker-compose.yml up
 
+Make sure you have docker and docker-compose installed
+
 ## API
 Connect to `ws://localhost:8000/ws/polygon/quotes` to start receiving crypto quotes data from Polygon.io
 
