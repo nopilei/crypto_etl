@@ -1,0 +1,5 @@
+AVAILABLE_QUOTE_PARAMS = [
+    'BTC-USD',
+    'ETH-USD',
+    'ETH-BTC',
+]

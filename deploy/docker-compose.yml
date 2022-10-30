@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7
+    networks:
+      - local
+    ports:
+      - "6379:6379"
+
+  web:
+    build:
+      dockerfile: deploy/Dockerfile
+      context: ..
+    env_file:
+      - ../env.env
+    volumes:
+      - ..:/project
+    networks:
+      - local
+    ports:
+      - "8001:8001"
+    command: daphne -p 8001 -b 0.0.0.0 apps_config.asgi:application
+
+  worker:
+    build:
+      dockerfile: deploy/Dockerfile
+      context: ..
+    env_file:
+      - ../env.env
+    volumes:
+      - ..:/project
+    networks:
+      - local
+    depends_on:
+      - redis
+      - web
+    command: python -m workers.run_workers
+
+  nginx:
+    build: ./nginx
+    networks:
+      - local
+    volumes:
+      - ..:/project
+    ports:
+      - 8000:8000
+    depends_on:
+      - web
+
+networks:
+  local:
+    driver: bridge

@@ -1,0 +1,5 @@
+daphne
+channels
+Django
+channels-redis
+websocket-client
