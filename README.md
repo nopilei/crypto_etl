@@ -1,7 +1,7 @@
 This is Django Channels project to fetch data about cryptocurrencies from external sources in real-time
 
 ## Setup
-Move to project folder and run
+Provide all env variables to env.env, then from project folder run
 
     docker-compose -f ./deploy/docker-compose.yml up
 
